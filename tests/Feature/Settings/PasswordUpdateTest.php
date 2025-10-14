@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 test('password update page is displayed', function () {
     $user = User::factory()->create();
@@ -22,8 +25,8 @@ test('password can be updated', function () {
         ->actingAs($user)
         ->from(route('password.edit'))
         ->put(route('password.update'), [
-            'current_password' => 'password',
-            'password' => 'new-password',
+            'current_password'      => 'password',
+            'password'              => 'new-password',
             'password_confirmation' => 'new-password',
         ]);
 
@@ -41,8 +44,8 @@ test('correct password must be provided to update password', function () {
         ->actingAs($user)
         ->from(route('password.edit'))
         ->put(route('password.update'), [
-            'current_password' => 'wrong-password',
-            'password' => 'new-password',
+            'current_password'      => 'wrong-password',
+            'password'              => 'new-password',
             'password_confirmation' => 'new-password',
         ]);
 
