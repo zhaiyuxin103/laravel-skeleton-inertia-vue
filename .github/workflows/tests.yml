@@ -14,25 +14,36 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        node: [22]
+        php: [8.4]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          php-version: 8.4
-          tools: composer:v2
-          coverage: xdebug
+          version: 10
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: xdebug
 
       - name: Install Node Dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -44,7 +55,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Build Assets
-        run: npm run build
+        run: pnpm build
 
       - name: Tests
         run: ./vendor/bin/pest

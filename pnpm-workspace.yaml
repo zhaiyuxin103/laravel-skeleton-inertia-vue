@@ -1,0 +1,9 @@
+packages:
+  - apps/**
+  - packages/**
+  - '!**/test/**'
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+  - vue-demi
