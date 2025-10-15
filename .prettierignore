@@ -4,3 +4,12 @@ resources/views/vendor/mail/*
 public/css/filament
 public/fonts/filament
 public/js/filament
+.cursor/rules/laravel-boost.mdc
+.cursor/mcp.json
+.github/copilot-instructions.md
+.junie/mcp/mcp.json
+.junie/guidelines.md
+.mcp.json
+AGENTS.md
+CLAUDE.md
+boost.json
