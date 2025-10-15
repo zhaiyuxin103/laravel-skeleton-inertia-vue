@@ -96,6 +96,7 @@
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
         "format": [
+            "@php artisan lang:update && :",
             "./vendor/bin/pint --parallel"
         ],
         "test:types": "./vendor/bin/phpstan analyse --memory-limit=2G",
